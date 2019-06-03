@@ -1,0 +1,25 @@
+.data_devolucao {
+    float: left;
+    margin-top: -25px;
+    margin-left: 400px;
+}
+
+.especificacao {
+    margin-top: -15px;
+}
+
+.contato {
+    float: left;
+    margin-top: -25px;
+    margin-left: 400px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.topo {
+    text-align: center;
+}
+

@@ -1,0 +1,18 @@
+body {
+    font-size: 12px;
+    color:#000;
+}
+
+.cod {
+    width: 10px;
+}
+
+.actions {
+    width: 110px;
+    text-align: center;
+}
+
+.box-body {
+    max-height: 725px;
+    overflow-y: auto;
+}

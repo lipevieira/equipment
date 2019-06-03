@@ -12,9 +12,21 @@
    </div>
    <div class="box-body">
        <div class="body-table" width="700px">
+            <div class="filtro">
+                <label for="empresa">Pesquisa por empresa</label><br/>
+                <select id="empresa" name="empresa" class="custom-select form-control">
+                        <option value="" selected disabled></option>
+                        @foreach ($empresa as $item)
+                            <option value="{{$item->fornecedor}}">{{$item->fornecedor}}</option>
+                        @endforeach
+                </select>
+            </div>
             <button type="button" class="btn btn-success btn-sm" id="btnInsert">
                 <span class="glyphicon glyphicon-plus"></span>  Inseir Documento
-            </button><br/><br/>
+            </button>
+
+            <br/><br/>
+            
             @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
@@ -43,8 +55,14 @@
                         <td>{{$item->empresa}}</td>
                         <td>
                         <a href="{{url('storage/arquivos/'.$item->nome)}}" class="btn btn-info btn-sm"  role="button" target="_b﻿lan﻿k">
-                                <span class="glyphicon glyphicon-folder-open"></span> Documento
+                            <span class="glyphicon glyphicon-folder-open"></span> Documento
                         </a>
+                        <button class="btn btn-warning btn-sm "  id="btnEditarDocumento"> 
+                            <span class="glyphicon glyphicon-pencil"></span> Editar
+                        </button> 
+                    <button class="btn btn-danger btn-sm "  id="btnExcluirDocumento" id_doc="{{$item->id}}" data-url="{{route('showDocumento')}}"> 
+                            <span class="glyphicon glyphicon-trash" ></span> Excluir
+                        </button> 
                         </td>
                     </tr>
                 </tbody>
@@ -66,8 +84,8 @@
            <div class="form-group">
             <label for="inputState">Empresa</label>
                 <select id="empresa" name="empresa" class="form-control" required>
+                    <option value="" selected disabled></option>
                     @foreach ($empresa as $item)
-                        <option value="" selected disabled></option>
                         <option value="{{$item->fornecedor}}">{{$item->fornecedor}}</option>
                     @endforeach
                 </select>
@@ -99,6 +117,28 @@
   </div>
 </div>
 
+{{-- Modal para confimar exclusão de documentos --}}
+<div class="modal" tabindex="-1" role="dialog" id="confirmaExclucao" >
+   <div class="modal-dialog"  role="document">
+      <div class="modal-content ">
+         <div class="modal-body">
+            <center><h3>Deseja realmente excluir este documento ?</h3><center>
+            <form action="{{route('deleteDocomento')}}" method="POST">
+               {!! csrf_field() !!}
+               <input type="hidden" name="idDeleteDocumento" value="" id="idDeleteDocumento">
+               <input type="hidden" name="nomeDocumento" value="" id="nomeDocumento">
+          
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-danger" id="btnConfirmarExclusao">
+               <span class="glyphicon glyphicon-remove"></span> Confirmar Exclusão 
+            </button>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
 @stop
 
 @section('css')

@@ -54,3 +54,5 @@ Route::get('/emprestimo', 'EmprestimoController@index')->name('index');
 // ROTAS PARA DOCUMENTOS
 Route::get('/documento', 'DocumentoController@index')->name('documento');
     Route::post('documento/insert', 'DocumentoController@insert')->name('insertDocumento');
+    Route::get('documento/mostar/documento', 'DocumentoController@showDocumento')->name('showDocumento');
+    Route::post('documento/delete', 'DocumentoController@deleteDocomento')->name('deleteDocomento');

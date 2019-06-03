@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Documento;
 
 class DocumentoController extends Controller
@@ -50,6 +51,41 @@ class DocumentoController extends Controller
                     ->route('documento')
                     ->with('success', 'Documento salvo com sucesso!');
             }
+        }
+    }
+   /***
+    *@description: Recuperando uma registro do banco de dados
+    @param mixed $id
+    @return documento
+    */
+    public function showDocumento(Request $request)
+    {
+        $id = $request->id;
+        $documento = Documento::find($id);
+   
+        return response()->json( $documento);
+    }
+    /***
+     * @description: Excluido um documento do banco de dados
+     * e também do serivdor
+     * @param mixed $idDeleteDocumento $nomeDocumento
+     * @return messagem
+     */
+    public function deleteDocomento(Request $request)
+    {
+        $id = $request->idDeleteDocumento;
+        $nome = $request->nomeDocumento;
+
+        $resposta = Documento::find($id)->delete();
+        if ($resposta) {
+            Storage::delete("arquivos/{$nome}"); // true ou false
+
+            return redirect()->route('documento')
+                ->with('success', 'Documento excluido com sucesso!');
+        }else{
+            return redirect()
+                ->back()
+                ->with('error', 'Falha ao exluir documento!');
         }
     }
 }

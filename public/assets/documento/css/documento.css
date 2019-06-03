@@ -3,7 +3,19 @@
     width: 70%;
 }
 
-
 .actions {
     width: 300px;
+}
+
+#empresa {
+    width: 300px;
+    height: 35px;
+}
+
+.filtro {
+    margin-left: 74%;
+}
+
+#btnInsert {
+    margin-top: -60px;
 }

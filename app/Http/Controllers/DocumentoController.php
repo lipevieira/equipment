@@ -88,4 +88,16 @@ class DocumentoController extends Controller
                 ->with('error', 'Falha ao exluir documento!');
         }
     }
+    public function filtro(Request $request, Documento $documento)
+    {
+        $dateForm = $request->all();
+        $empresa = DB::table('equipamento')
+            ->select('fornecedor')
+            ->orderBy('fornecedor', 'asc')
+            ->groupBy('fornecedor')
+            ->get();
+        $documentos = $documento->search($dateForm);
+
+        return view('documentos.documento', compact( 'documentos', 'empresa'));
+    }
 }

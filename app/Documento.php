@@ -18,4 +18,13 @@ class Documento extends Model
             'nome'   => 'required|max:150',
         ];
     } 
+    public function search(Array $date)
+    {
+        return $this->where(function($query) use($date){
+            if (isset($date['empresa'])) 
+                $query->where('empresa', $date['empresa']);
+            
+        })->get();
+
+    }
 }

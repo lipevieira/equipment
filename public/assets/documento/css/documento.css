@@ -1,21 +1,27 @@
 .body-table {
     margin: auto;
     width: 70%;
+    max-height: 680px;
+    overflow-y: auto;
 }
 
 .actions {
     width: 300px;
 }
 
-#empresa {
-    width: 300px;
-    height: 35px;
-}
-
 .filtro {
-    margin-left: 74%;
+    margin-left: 73%;
 }
 
 #btnInsert {
     margin-top: -60px;
+}
+
+.actions_tables {
+    text-align: right;
+    padding: 5px;
+}
+
+#btnAtualizarTabela {
+    width: 126px;
 }

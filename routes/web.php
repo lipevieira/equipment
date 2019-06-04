@@ -21,6 +21,8 @@ Route::get('perfil', 'UserController@profile')->name('perfil');
 
 Route::post('perfil/update-user', 'UserController@updateUser')->name('update-user');
 
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::post('addEquipamento', 'HomeController@insert')->name('insert');
 
 Route::post('updateEquipamento', 'HomeController@update')->name('update');
@@ -31,7 +33,7 @@ Route::post('showEquipamento', 'HomeController@showEquipamento')->name('showEqui
 
 Route::post('addEmprestimo', 'EmprestimoController@insertEmprestimo')->name('addEmprestimo');
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::get('/equipamento', 'HomeController@equipamentoAll')->name('equipamentoAll');
 
@@ -56,3 +58,4 @@ Route::get('/documento', 'DocumentoController@index')->name('documento');
     Route::post('documento/insert', 'DocumentoController@insert')->name('insertDocumento');
     Route::get('documento/mostar/documento', 'DocumentoController@showDocumento')->name('showDocumento');
     Route::post('documento/delete', 'DocumentoController@deleteDocomento')->name('deleteDocomento');
+    Route::post('documento/filtro', 'DocumentoController@filtro')->name('filtro');

@@ -13,17 +13,27 @@
    <div class="box-body">
        <div class="body-table" width="700px">
             <div class="filtro">
-                <label for="empresa">Pesquisa por empresa</label><br/>
-                <select id="empresa" name="empresa" class="custom-select form-control">
-                        <option value="" selected disabled></option>
+            <form action="{{route('filtro')}}" method="POST" class="form-inline">
+                    {!! csrf_field() !!}
+                    <label for="empresa">Pesquisa por empresa</label><br/>
+                    <select id="empresa" name="empresa" class="custom-select form-control" required>
+                        <option value=""> --Selecione uma empresa-- </option>
                         @foreach ($empresa as $item)
                             <option value="{{$item->fornecedor}}">{{$item->fornecedor}}</option>
                         @endforeach
-                </select>
+                    </select>
+                    <button type="submit" class="btn btn-primary ">
+                        <span class="glyphicon glyphicon-search"></span> Pesquisa
+                    </button>
+                </form>
             </div>
             <button type="button" class="btn btn-success btn-sm" id="btnInsert">
                 <span class="glyphicon glyphicon-plus"></span>  Inseir Documento
-            </button>
+            </button><br/>
+            
+            <a href="{{route('documento')}}" class="btn btn-primary btn-sm" id="btnAtualizarTabela">
+                <span class="glyphicon glyphicon-repeat"></span> Atualizar Tabela
+            </a>
 
             <br/><br/>
             
@@ -38,13 +48,13 @@
                     {{ session('error') }}
                 </div>
             @endif      
-        <table id="tblEquipamento" class="table table-bordered table-hover ">
+        <table id="tblDocumento" class="table table-bordered table-hover ">
               <thead>
                  <tr>
                     <th width="15px">ID</th>
                     <th width="600px">DESCRIÇÃO</th>
                     <th >EMPRESA</th>
-                    <th class="actions">AÇÔES</th>
+                    <th width="257px">AÇÔES</th>
                  </tr>
               </thead>
               @foreach ($documentos as $item)
@@ -53,14 +63,14 @@
                         <th scope="row">{{$item->id}}</th>
                         <td>{{$item->descricao}}</td>
                         <td>{{$item->empresa}}</td>
-                        <td>
+                        <td class="actions_tables">
                         <a href="{{url('storage/arquivos/'.$item->nome)}}" class="btn btn-info btn-sm"  role="button" target="_b﻿lan﻿k">
                             <span class="glyphicon glyphicon-folder-open"></span> Documento
                         </a>
                         <button class="btn btn-warning btn-sm "  id="btnEditarDocumento"> 
                             <span class="glyphicon glyphicon-pencil"></span> Editar
                         </button> 
-                    <button class="btn btn-danger btn-sm "  id="btnExcluirDocumento" id_doc="{{$item->id}}" data-url="{{route('showDocumento')}}"> 
+                        <button class="btn btn-danger btn-sm "  id="btnExcluirDocumento" id_doc="{{$item->id}}" data-url="{{route('showDocumento')}}"> 
                             <span class="glyphicon glyphicon-trash" ></span> Excluir
                         </button> 
                         </td>

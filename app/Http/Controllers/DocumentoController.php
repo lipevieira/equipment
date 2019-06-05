@@ -53,17 +53,17 @@ class DocumentoController extends Controller
             }
         }
     }
-   /***
-    *@description: Recuperando uma registro do banco de dados
+    /***
+     *@description: Recuperando uma registro do banco de dados
     @param mixed $id
     @return documento
-    */
+     */
     public function showDocumento(Request $request)
     {
         $id = $request->id;
         $documento = Documento::find($id);
-   
-        return response()->json( $documento);
+
+        return response()->json($documento);
     }
     /***
      * @description: Excluido um documento do banco de dados
@@ -82,7 +82,7 @@ class DocumentoController extends Controller
 
             return redirect()->route('documento')
                 ->with('success', 'Documento excluido com sucesso!');
-        }else{
+        } else {
             return redirect()
                 ->back()
                 ->with('error', 'Falha ao exluir documento!');
@@ -98,6 +98,21 @@ class DocumentoController extends Controller
             ->get();
         $documentos = $documento->search($dateForm);
 
-        return view('documentos.documento', compact( 'documentos', 'empresa'));
+        return view('documentos.documento', compact('documentos', 'empresa'));
+    }
+    public function updateDocumento(Request $request)
+    {
+        // TO-DE FAZER: Atualização no banco de dados  e colocar a coluna empresa como not null
+        // $documento = new Documento();
+        // $rules = $documento->rules();
+
+        // $dataForm = $request->except('_token');
+        // // dd($dataForm);
+        // $documento = Documento::find($request->idEdit);
+        // $documento->update($dataForm);
+        // dd($dataForm);
+
+        return redirect()->route('documento')
+            ->with('success', 'Documento alterado com sucesso!');
     }
 }

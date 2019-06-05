@@ -67,7 +67,7 @@
                         <a href="{{url('storage/arquivos/'.$item->nome)}}" class="btn btn-info btn-sm"  role="button" target="_b﻿lan﻿k">
                             <span class="glyphicon glyphicon-folder-open"></span> Documento
                         </a>
-                        <button class="btn btn-warning btn-sm "  id="btnEditarDocumento"> 
+                        <button class="btn btn-warning btn-sm "  id="btnEditarDocumento" id_doc="{{$item->id}}" data-url="{{route('showDocumento')}}"> 
                             <span class="glyphicon glyphicon-pencil"></span> Editar
                         </button> 
                         <button class="btn btn-danger btn-sm "  id="btnExcluirDocumento" id_doc="{{$item->id}}" data-url="{{route('showDocumento')}}"> 
@@ -81,7 +81,7 @@
        </div>
    </div>
 </div>
-{{-- Modal para inserir ou atulizar documentos --}}
+{{-- Modal para inserir documentos --}}
 <div class="modal fade" id="modalInsertDocumento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -119,6 +119,50 @@
                     <span class="glyphicon glyphicon-ok"></span> Salvar
                 </button>
                 <button type="button" class="btn btn-success btn-sm" id="btnUpdate">
+                    <span class="glyphicon glyphicon-pencil"></span> Atualizar
+                </button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+{{-- Modal para Editar documentos --}}
+<div class="modal fade" id="modalUpdateDocumento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar  Documentos</h5>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="{{route('updateDocumento')}}" enctype="multipart/form-data">
+            {!! csrf_field() !!}
+           <div class="form-group">
+            <label for="inputState">Empresa</label>
+                <select id="empresaEdit" name="empresaEdit" class="form-control" required>
+                    <option value="" selected disabled></option>
+                    @foreach ($empresa as $item)
+                        <option value="{{$item->fornecedor}}">{{$item->fornecedor}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <input type="hidden"  id="idEdit" name="idEdit" value="">
+
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Documento:</label>
+                <input type="file" class="form-control" id="documentoEdit" name="documentoEdit">
+            </div>
+
+            <div class="form-group">
+                <label for="message-text" class="col-form-label">Descrição:</label>
+                <textarea class="form-control" id="descricaoEdit" name="descricaoEdit"></textarea>
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove"></span> Fechar
+                </button>
+                <button type="submit" class="btn btn-success btn-sm" id="btnUpdate">
                     <span class="glyphicon glyphicon-pencil"></span> Atualizar
                 </button>
             </div>

@@ -1,16 +1,16 @@
 $(document).ready(function () {
 
 
-    // function clearFilds() {
-    //     $('#documento').val('');
-    //     $('#empresa').val('');
-    //     $('#descricao').val('');
-    // }
+    function clearFilds() {
+        $('#empresa').val('');
+        $('#documento').val('');
+        $('#descricao').val('');
+    }
 
     $('#btnInsert').on('click', function () {
-        $('#btnSalvar').show();
-        $('#btnUpdate').hide();
+        clearFilds();
         $('#modalInsertDocumento').modal('show');
+
     });
 
     $('table tr td #btnExcluirDocumento').on('click', function () {

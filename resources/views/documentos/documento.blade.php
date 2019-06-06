@@ -81,51 +81,7 @@
        </div>
    </div>
 </div>
-{{-- Modal para inserir documentos --}}
-<div class="modal fade" id="modalInsertDocumento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cadastro de Documentos</h5>
-      </div>
-      <div class="modal-body">
-        <form method="POST" action="{{route('insertDocumento')}}" enctype="multipart/form-data">
-            {!! csrf_field() !!}
-           <div class="form-group">
-            <label for="inputState">Empresa</label>
-                <select id="empresa" name="empresa" class="form-control" required>
-                    <option value="" selected disabled></option>
-                    @foreach ($empresa as $item)
-                        <option value="{{$item->fornecedor}}">{{$item->fornecedor}}</option>
-                    @endforeach
-                </select>
-            </div>
 
-            <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Documento:</label>
-                <input type="file" class="form-control" id="documento" name="documento" required>
-            </div>
-
-            <div class="form-group">
-                <label for="message-text" class="col-form-label">Descrição:</label>
-                <textarea class="form-control" id="descricao" name="descricao" required></textarea>
-            </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">
-                    <span class="glyphicon glyphicon-remove"></span> Fechar
-                </button>
-                <button type="submit" class="btn btn-primary btn-sm" id="btnSalvar">
-                    <span class="glyphicon glyphicon-ok"></span> Salvar
-                </button>
-                <button type="button" class="btn btn-success btn-sm" id="btnUpdate">
-                    <span class="glyphicon glyphicon-pencil"></span> Atualizar
-                </button>
-            </div>
-        </form>
-    </div>
-  </div>
-</div>
 {{-- Modal para Editar documentos --}}
 <div class="modal fade" id="modalUpdateDocumento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -138,7 +94,7 @@
             {!! csrf_field() !!}
            <div class="form-group">
             <label for="inputState">Empresa</label>
-                <select id="empresaEdit" name="empresaEdit" class="form-control" required>
+                <select id="empresaEdit" name="empresa" class="form-control" required>
                     <option value="" selected disabled></option>
                     @foreach ($empresa as $item)
                         <option value="{{$item->fornecedor}}">{{$item->fornecedor}}</option>
@@ -155,7 +111,7 @@
 
             <div class="form-group">
                 <label for="message-text" class="col-form-label">Descrição:</label>
-                <textarea class="form-control" id="descricaoEdit" name="descricaoEdit"></textarea>
+                <textarea class="form-control" id="descricaoEdit" name="descricao"></textarea>
             </div>
             </div>
             <div class="modal-footer">
@@ -192,6 +148,49 @@
          </div>
       </div>
    </div>
+</div>
+
+{{-- Modal para inserir documentos --}}
+<div class="modal fade" id="modalInsertDocumento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cadastro de Documentos</h5>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="{{route('insertDocumento')}}" enctype="multipart/form-data">
+            {!! csrf_field() !!}
+           <div class="form-group">
+            <label for="inputState">Empresa</label>
+                <select id="empresa" name="empresa" class="form-control" required>
+                    <option value="" selected disabled></option>
+                    @foreach ($empresa as $item)
+                        <option value="{{$item->fornecedor}}">{{$item->fornecedor}}</option>
+                    @endforeach
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Documento:</label>
+                <input type="file" class="form-control" id="documento" name="documento" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message-text" class="col-form-label">Descrição:</label>
+                <textarea class="form-control" id="descricao" name="descricao" required></textarea>
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove"></span> Fechar
+                </button>
+                <button type="submit" class="btn btn-primary btn-sm" id="btnSalvar">
+                    <span class="glyphicon glyphicon-ok"></span> Salvar
+                </button>
+            </div>
+        </form>
+    </div>
+  </div>
 </div>
 @stop
 

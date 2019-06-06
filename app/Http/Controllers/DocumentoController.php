@@ -103,14 +103,35 @@ class DocumentoController extends Controller
     public function updateDocumento(Request $request)
     {
         // TO-DE FAZER: Atualização no banco de dados  e colocar a coluna empresa como not null
-        // $documento = new Documento();
-        // $rules = $documento->rules();
 
-        // $dataForm = $request->except('_token');
-        // // dd($dataForm);
-        // $documento = Documento::find($request->idEdit);
-        // $documento->update($dataForm);
-        // dd($dataForm);
+        $dataForm = $request->except('_token');
+        // Verificando se enviou arquivo.
+        if ($request->hasFile('documento') && $request->file('documento')->isValid()) {
+
+            dd($dataForm);
+            # Define um nome aleatório para o arquivo baseado no timestamps atual
+            $name = uniqid(date('HisYmd'));
+            # Recupera a extensão do arquivo
+            $extension = $request->documento->extension();
+            # Define finalmente o nome
+            $nameFile = "{$name}.{$extension}";
+            # Faz o upload para uma pasta chamdas de arquivos:
+            $upload = $request->documento->storeAs('arquivos', $nameFile);
+
+            $dataForm['documento'] = $nameFile;
+            // dd($dataForm['documento']); 
+
+            # Verifica se NÃO deu certo o upload (Redireciona de volta)
+            if (!$upload) {
+                return redirect()
+                    ->back()
+                    ->with('error', 'Falha ao fazer upload de arquivos')
+                    ->withInput();
+            }
+        }
+        # Salvando registro no banco de dados.
+        $documento = Documento::find($request->idEdit);
+        $documento->update($dataForm);
 
         return redirect()->route('documento')
             ->with('success', 'Documento alterado com sucesso!');

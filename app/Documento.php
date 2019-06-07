@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Documento extends Model
 {
@@ -14,8 +15,8 @@ class Documento extends Model
     {
         return [
             'empresa'   => 'required|max:45',
-            'descricao' => 'min:3|max:150',
-            'nome'   => 'required|max:150',
+            'descricao' => 'max:190',
+            
         ];
     } 
     public function search(Array $date)
@@ -25,6 +26,13 @@ class Documento extends Model
                 $query->where('empresa', $date['empresa']);
             
         })->get();
-
+    }
+    public function getEmpresa()
+    {
+        return  DB::table('equipamento')
+            ->select('fornecedor')
+            ->orderBy('fornecedor', 'asc')
+            ->groupBy('fornecedor')
+            ->get();
     }
 }

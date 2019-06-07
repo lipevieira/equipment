@@ -43,11 +43,23 @@
                 </div>
             @endif
 
+            {{-- Caso acontessa algum error ao enviar arquivo para o servidor mostrar está MSG --}}
             @if(session('error'))
                 <div class="alert alert-danger">
                     {{ session('error') }}
                 </div>
-            @endif      
+            @endif 
+            {{--Caso os campos do forumario de inserir seja invalidos mostrar essa MSG  --}}
+            
+            @if(isset($errors) && count($errors) > 0)
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                        <p>{{$error}}</p>
+                    @endforeach
+                </div>
+            @endif 
+
+
         <table id="tblDocumento" class="table table-bordered table-hover ">
               <thead>
                  <tr>
@@ -106,7 +118,7 @@
 
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Documento:</label>
-                <input type="file" class="form-control" id="documentoEdit" name="documentoEdit">
+                <input type="file" class="form-control" id="nome" name="nome">
             </div>
 
             <div class="form-group">
@@ -172,12 +184,12 @@
             
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Documento:</label>
-                <input type="file" class="form-control" id="documento" name="documento" required>
+                <input type="file" class="form-control" id="nome" name="nome" required>
             </div>
 
             <div class="form-group">
                 <label for="message-text" class="col-form-label">Descrição:</label>
-                <textarea class="form-control" id="descricao" name="descricao" required></textarea>
+                <textarea class="form-control" id="descricao" name="descricao"></textarea>
             </div>
             </div>
             <div class="modal-footer">

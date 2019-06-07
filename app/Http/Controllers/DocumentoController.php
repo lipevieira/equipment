@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Documento;
 
@@ -11,27 +10,29 @@ class DocumentoController extends Controller
 {
     public function index()
     {
+        $doc = new Documento();
         $documentos = Documento::all();
-        $empresa = DB::table('equipamento')
-            ->select('fornecedor')
-            ->orderBy('fornecedor', 'asc')
-            ->groupBy('fornecedor')
-            ->get();
+
+        $empresa = $doc->getEmpresa();
 
         return view('documentos.documento', compact('empresa', 'documentos'));
     }
     public function insert(Request $request)
     {
         $documento = new Documento();
-        if ($request->hasFile('documento') && $request->file('documento')->isValid()) {
+        $rules = $documento->rules();
+        #validamdo formulario
+        $this->validate($request, $rules);
+
+        if ($request->hasFile('nome') && $request->file('nome')->isValid()) {
             # Define um nome aleatório para o arquivo baseado no timestamps atual
             $name = uniqid(date('HisYmd'));
             # Recupera a extensão do arquivo
-            $extension = $request->documento->extension();
+            $extension = $request->nome->extension();
             # Define finalmente o nome
             $nameFile = "{$name}.{$extension}";
             # Faz o upload para uma pasta chamdas de arquivos:
-            $upload = $request->documento->storeAs('arquivos', $nameFile);
+            $upload = $request->nome->storeAs('arquivos', $nameFile);
             # Verifica se NÃO deu certo o upload (Redireciona de volta)
             if (!$upload) {
                 return redirect()
@@ -90,37 +91,31 @@ class DocumentoController extends Controller
     }
     public function filtro(Request $request, Documento $documento)
     {
+        $doc = new Documento();
         $dateForm = $request->all();
-        $empresa = DB::table('equipamento')
-            ->select('fornecedor')
-            ->orderBy('fornecedor', 'asc')
-            ->groupBy('fornecedor')
-            ->get();
+        $empresa = $doc->getEmpresa();
         $documentos = $documento->search($dateForm);
 
         return view('documentos.documento', compact('documentos', 'empresa'));
     }
     public function updateDocumento(Request $request)
     {
-        // TO-DE FAZER: Atualização no banco de dados  e colocar a coluna empresa como not null
-
         $dataForm = $request->except('_token');
+  
         // Verificando se enviou arquivo.
-        if ($request->hasFile('documento') && $request->file('documento')->isValid()) {
+        if ($request->hasFile('nome') && $request->file('nome')->isValid()) {
 
-            dd($dataForm);
             # Define um nome aleatório para o arquivo baseado no timestamps atual
             $name = uniqid(date('HisYmd'));
             # Recupera a extensão do arquivo
-            $extension = $request->documento->extension();
+            $extension = $request->nome->extension();
             # Define finalmente o nome
             $nameFile = "{$name}.{$extension}";
             # Faz o upload para uma pasta chamdas de arquivos:
-            $upload = $request->documento->storeAs('arquivos', $nameFile);
+            $upload = $request->nome->storeAs('arquivos', $nameFile);
 
-            $dataForm['documento'] = $nameFile;
-            // dd($dataForm['documento']); 
-
+            $dataForm['nome'] = $nameFile;
+            
             # Verifica se NÃO deu certo o upload (Redireciona de volta)
             if (!$upload) {
                 return redirect()

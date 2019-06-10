@@ -44,6 +44,9 @@
 <button type="button" class="btn btn-success btn-sm" id="btnAbrirOcomon">
    <span class="glyphicon glyphicon-share-alt"></span> Abrir Ocomon
 </button>
+<a href="{{route('contagemEquipamento')}}" class="btn bg-maroon margin btn-sm"  role="button" target="_b﻿lan﻿k" id="btnContagemEquipamento">
+   <span class="glyphicon glyphicon-list"></span> Contagem de Equipamento
+</a>
 <!-- Modal com Formulario para Salvar Equipamentos Equipamentos. -->
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalInsertUpdate">
    <div class="modal-dialog modal-lg">

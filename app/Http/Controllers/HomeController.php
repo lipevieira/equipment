@@ -25,12 +25,11 @@ class HomeController extends Controller
         $equipamento = Equipamento::all();
         // return DataTables::of($equipamento)->make(true);
         return Datatables::of($equipamento)
-              ->addColumn('action', function($equipamento){
-             return '<a onclick="showEquipamentoEmprstimo('.$equipamento->id.')" class="btn btn-sm btn-primary" id="btnEmpresta"> <span class="glyphicon glyphicon-transfer"></span></a>'.' '. 
-                    '<a onclick="showEquipamentoEdit('.$equipamento->id.')" class="btn btn-warning btn-sm "  id="btnEditar"> <span class="glyphicon glyphicon-pencil"></span></a>'.' '. 
-                    '<a onclick="showEquipamentoDelete('.$equipamento->id.')" class="btn btn-danger btn-sm " id="btnExcluir"> <span class="glyphicon glyphicon-trash"></span></a>';
-
-          })->make(true);
+            ->addColumn('action', function ($equipamento) {
+                return '<a onclick="showEquipamentoEmprstimo(' . $equipamento->id . ')" class="btn btn-sm btn-primary" id="btnEmpresta"> <span class="glyphicon glyphicon-transfer"></span></a>' . ' ' .
+                    '<a onclick="showEquipamentoEdit(' . $equipamento->id . ')" class="btn btn-warning btn-sm "  id="btnEditar"> <span class="glyphicon glyphicon-pencil"></span></a>' . ' ' .
+                    '<a onclick="showEquipamentoDelete(' . $equipamento->id . ')" class="btn btn-danger btn-sm " id="btnExcluir"> <span class="glyphicon glyphicon-trash"></span></a>';
+            })->make(true);
     }
     public function insert(Request $request)
     {
@@ -77,4 +76,13 @@ class HomeController extends Controller
 
         return $equipamento;
     }
+    public function contagemEquipamento()
+    {
+        $equipamento =  new Equipamento();
+        $equipamento = $equipamento->getContagemEquipamento();
+
+        $total = Equipamento::all()->count();
+        return view('contagemEquipamento.contagemEquipamento', compact('equipamento', 'total'));
+    }
+   
 }

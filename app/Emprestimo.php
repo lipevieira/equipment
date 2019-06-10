@@ -33,7 +33,7 @@ class Emprestimo extends Model
             'data_saida' => 'max:10',
             'numero' => 'max:11',
         ];
-
     }
+  
     protected $fillable = ['destino', 'nome', 'data_devolucao', 'descricao', 'numero', 'data_saida', 'numero', 'marca', 'equipamento_id'];
 }

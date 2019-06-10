@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Equipamento extends Model
 {
@@ -39,6 +40,13 @@ class Equipamento extends Model
             'marca' => 'required|max:40',
             'observacoes' => 'max:190',
         ];
+    }
+    public function getContagemEquipamento()
+    {
+        return  DB::table('equipamento')
+            ->select('equipamento',DB::raw('count(*) as total'))
+            ->groupBy('equipamento')
+            ->get();
     }
 
     protected $fillable = ['local', 'setor', 'usuario', 'equipamento', 'descricao', 'serial', 'fornecedor', 'marca', 'observacoes'];

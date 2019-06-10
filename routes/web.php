@@ -23,6 +23,7 @@ Route::get('perfil', 'UserController@profile')->name('perfil');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::get('contagem-equipamento', 'HomeController@contagemEquipamento')->name('contagemEquipamento');
     Route::post('addEquipamento', 'HomeController@insert')->name('insert');
     Route::post('updateEquipamento', 'HomeController@update')->name('update');
     Route::post('deleteEquipamento', 'HomeController@delete')->name('delete');

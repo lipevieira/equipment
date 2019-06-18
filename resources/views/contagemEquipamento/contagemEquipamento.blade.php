@@ -22,5 +22,6 @@
         </tbody>
     </table> 
 <h4>Total de Equipamentos é: {{$total}}</h4>
+
 @endsection
 

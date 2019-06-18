@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 use Response;
 use Validator;
 use Yajra\DataTables\DataTables;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class HomeController extends Controller
 {
@@ -82,7 +83,9 @@ class HomeController extends Controller
         $equipamento = $equipamento->getContagemEquipamento();
 
         $total = Equipamento::all()->count();
-        return view('contagemEquipamento.contagemEquipamento', compact('equipamento', 'total'));
+        // return view('contagemEquipamento.contagemEquipamento', compact('equipamento', 'total'));
+        $pdf = PDF::loadView( 'contagemEquipamento.contagemEquipamento', compact('equipamento', 'total'));
+        return $pdf->download('relatório.pdf');
     }
    
 }

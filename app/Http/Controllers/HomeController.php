@@ -43,6 +43,7 @@ class HomeController extends Controller
             ));
         } else {
             $dataForm = $request->except('_token');
+             unset($dataForm['id']);
             $equipamento->insert($dataForm);
             return response()->json($equipamento);
         }
@@ -50,6 +51,7 @@ class HomeController extends Controller
     public function update(Request $request)
     {
         $equipamento = new Equipamento();
+        $dataForm = $request->except('_token');
         $rules = $equipamento->rulesUpdate();
 
         $validator = Validator::make(Input::all(), $rules);
@@ -58,7 +60,6 @@ class HomeController extends Controller
                 'errors' => $validator->getMessageBag()->toArray(),
             ));
         } else {
-            $dataForm = $request->except('_token');
             $equipamento = Equipamento::find($request->id);
             $equipamento->update($dataForm);
             return response()->json($equipamento);

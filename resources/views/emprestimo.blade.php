@@ -114,12 +114,14 @@
 @stop
 
 @section('js')
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-    <script type="text/javascript" language="javascript" src="http://cdn.datatables.net/plug-ins/1.10.15/dataRender/datetime.js"></script>
-    <script type="text/javascript" language="javascript" src="{{env('APP_URL')}}/assets/emprestimo/js/emprestimo.js"></script>
+    <script src="{{asset('js/libs/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/libs/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('js/libs/jszip.min.js')}}"></script>
+    <script src="{{asset('js/libs/pdfmake.min.js')}}"></script>
+    <script src="{{ asset('js/libs/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('js/libs/buttons.html5.min.js') }}"></script>
+
+<script type="text/javascript" language="javascript" src="{{ asset('/assets/emprestimo/js/emprestimo.js') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script> 
    <script>
       /* 

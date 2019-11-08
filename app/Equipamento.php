@@ -15,19 +15,17 @@ class Equipamento extends Model
         return [
             'local' => 'required|max:40',
             'setor' => 'required|max:40',
-            'usuario' => 'required|min:3|max:40',
             'equipamento' => 'required|max:40',
             'descricao' => 'required|max:40',
             'serial' => 'required|unique:equipamento|max:40',
             'fornecedor' => 'required|max:40',
             'marca' => 'required|max:40',
-            'observacoes' => 'max:150',
+           
         ];
 
     }
 
     public function rulesUpdate()
-    // TO-DE FAZER: Tratamento para mostrar meg de error ao tentar inseiri um serial que  já existe
     {
         return [
             'local' => 'required|max:40',
@@ -35,10 +33,15 @@ class Equipamento extends Model
             'usuario' => 'required|min:3|max:40',
             'equipamento' => 'required|max:40',
             'descricao' => 'required|max:40',
-            'serial' => 'required|max:40',
+            'serial' => 'required|unique:equipamento,id,:id|max:40',
+
+// 'email'                 => 'required|email|unique:users,id,:id',
+
             'fornecedor' => 'required|max:40',
             'marca' => 'required|max:40',
-            'observacoes' => 'max:190',
+          
+
+             // 'name' => 'unique:permissions,name,'.$this->get('id').'|max:255',
         ];
     }
     public function getContagemEquipamento()
@@ -49,5 +52,5 @@ class Equipamento extends Model
             ->get();
     }
 
-    protected $fillable = ['local', 'setor', 'usuario', 'equipamento', 'descricao', 'serial', 'fornecedor', 'marca', 'observacoes'];
+    protected $fillable = ['local', 'setor', 'usuario', 'tombo','equipamento', 'descricao', 'serial', 'fornecedor', 'marca', 'observacoes','computador'];
 }

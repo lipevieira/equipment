@@ -76,7 +76,7 @@
                         <td>{{$item->descricao}}</td>
                         <td>{{$item->empresa}}</td>
                         <td class="actions_tables">
-                        <a href="{{url('storage/arquivos/'.$item->nome)}}" class="btn btn-info btn-sm"  role="button" target="_b﻿lan﻿k">
+                        <a href="{{route('file', ['nome' => $item->nome])}}" class="btn btn-info btn-sm"  role="button">
                             <span class="glyphicon glyphicon-folder-open"></span> Documento
                         </a>
                         <button class="btn btn-warning btn-sm "  id="btnEditarDocumento" id_doc="{{$item->id}}" data-url="{{route('showDocumento')}}"> 

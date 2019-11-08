@@ -131,4 +131,11 @@ class DocumentoController extends Controller
         return redirect()->route('documento')
             ->with('success', 'Documento alterado com sucesso!');
     }
+     public function download(Request $request)
+    {
+        $nome = $request->nome;
+        return response()->download(storage_path("app/public/arquivos/".$nome));
+        // return response()->download($pathToFile);
+    }
+
 }

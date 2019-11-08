@@ -6,7 +6,8 @@ $(document).ready(function () {
     * carregamentode de arquivos.
     * @returns json
     */
-    const LINK = "http://localhost/equipment/public/";
+    // const LINK = "http://localhost/equipment/public/";
+    const LINK = "http://192.168.187.9/equipment/public/";
 
     /**
     * @description:
@@ -52,6 +53,9 @@ $(document).ready(function () {
             {
                 text: 'Relatório em pdf',
                 extend: 'pdfHtml5',
+                text: '<i class="fa fa-file-pdf-o"></i> PDF',
+                titleAttr: 'PDF',
+                className: 'btn btn-primary btn-sm',
                 orientation: 'landscape',
                 pageSize: 'LEGAL',
                 title: '  ',
@@ -115,6 +119,9 @@ $(document).ready(function () {
             },
             {
                 extend: 'copyHtml5',
+                text: '<i class="fa fa-file-pdf-o"></i> PDF',
+                titleAttr: 'PDF',
+                className: 'btn btn-primary btn-sm',
                 text: 'Cópia Relatório',
                 exportOptions: {
                     columns: [0, ':visible']
@@ -150,6 +157,7 @@ $(document).ready(function () {
         clearFields();
         $('#btnSalvar').show();
         $('#btnUpdate').hide();
+         $('.modal-title').text('Registro de Equipamentos');
         $('#modalInsertUpdate').modal('show');
     });
     /**

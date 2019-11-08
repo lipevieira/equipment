@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('perfil', 'UserController@profile')->name('perfil');
 
     Route::post('perfil/update-user', 'UserController@updateUser')->name('update-user');
+    Route::get('/resert-user/{id}', 'UserController@resertUser')->name('resert.user');
+     Route::post('/delete', 'UserController@delete')->name('delete.user');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -43,8 +45,20 @@ Route::get('/emprestimo', 'EmprestimoController@index')->name('index');
 
 // ROTAS PARA DOCUMENTOS
 Route::get('/documento', 'DocumentoController@index')->name('documento');
+    Route::get('documento/file/{nome}', 'DocumentoController@download')->name( 'file');
     Route::post('documento/insert', 'DocumentoController@insert')->name('insertDocumento');
     Route::get('documento/mostar/documento', 'DocumentoController@showDocumento')->name('showDocumento');
     Route::post('documento/delete', 'DocumentoController@deleteDocomento')->name('deleteDocomento');
     Route::post('documento/filtro', 'DocumentoController@filtro')->name('filtro');
     Route::post('documento/update', 'DocumentoController@updateDocumento')->name('updateDocumento');
+    
+Route::group(['prefix' => 'links'], function () {
+    Route::get('/index', 'Link\LinkController@index')->name('link.index');
+    Route::get('/insert', 'Link\LinkController@insertShow')->name('insert.show');
+    Route::post('/store', 'Link\LinkController@store')->name('link.store');
+    Route::get('/show/{id}', 'Link\LinkController@show')->name('link.show');
+    Route::get('/show', 'Link\LinkController@showDelete')->name('link.show.delete');
+    Route::post('/update/{id}', 'Link\LinkController@update')->name('link.update');
+    Route::post('/delete', 'Link\LinkController@delete')->name('link.delete');
+    
+});       
